@@ -9,8 +9,8 @@
         [else (error "mystery number: ~a" a)]))
 
 (define (perceive labeled-points)
-  (define labels (map car labeled-points))
-  (define points (map cdr labeled-points))
+  (define labels (map cdr labeled-points))
+  (define points (map car labeled-points))
   (define (P coefs bias)
     (define-values (new-coefs new-bias)
       (for/fold ([coefs coefs]

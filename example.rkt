@@ -9,14 +9,14 @@
 (define points
   (for/list ([__ (in-range 1000)])
     (let ([point (make-random-point)])
-      (cons (if (> (apply + (vector->list point)) 2) 1 -1)
-            point))))
+      (cons point
+            (if (> (apply + (vector->list point)) 2) 1 -1)))))
 
 (define-values (train-points test-points) (split-at points 100))
 
 (define-values (vals perceiver) (perceive train-points))
 
 (define (correct? point)
-  (= (car point) (perceiver (cdr point))))
+  (= (cdr point) (perceiver (car point))))
 
-(/ (count correct? test-points) (length test-points))
+(exact->inexact (/ (count correct? test-points) (length test-points)))
